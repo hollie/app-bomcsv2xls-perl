@@ -1,7 +1,7 @@
 #! /usr/bin/env perl
 
 # PODNAME: bom-csv2xls.pl
-# ABSTRACT: Convertor for the output of of the Eagle full BOM mount script into an xls file
+# ABSTRACT: Converter for the output of of the Eagle full BOM mount script into an xls file
 
 use strict;
 use warnings;
@@ -13,27 +13,35 @@ use App::BomCsv2Xls;
 use Getopt::Long;
 use Pod::Usage;
 
-my ($help, $man);
+my ( $help, $man );
 
 # Get the command line options
 GetOptions(
-    'file=s'     => \$file,
-    'help|?|h'   => \$help,
-    'man'        => \$man,
+    'help|?|h' => \$help,
+    'man'      => \$man,
 ) or pod2usage(2);
 
-pod2usage(1) if ( $help || !defined($file) || @ARGV == 0);
+pod2usage(1) if ( $help || @ARGV == 0 );
 pod2usage( -exitstatus => 0, -verbose => 2 ) if ($man);
 
-my $inFile = $ARGV[0];
-my $outFile = ($inFile =~ s/csv/xlsx/);
+my $inFile  = $ARGV[0];
+my $outFile = $inFile;
+$outFile =~ s/csv/xlsx/;
 
 # Create the convertor object
-my $conv = new App::BomCsv2Xls(inputFile => $inFile, outputFile => $outFile);
+my $conv
+    = new App::BomCsv2Xls( inputFile => $inFile, outputFile => $outFile );
+
 # Convert
 $conv->write_xls();
 
+# Report
+my ($mount, $nomount, $testpoints) = $conv->report();
+
 say "Csv file converted and written to $outFile";
+say " To mount   : $mount";
+say " Not mounted: $nomount";
+say " Test points: $testpoints";
 
 
 =head1 NAME
@@ -42,7 +50,7 @@ bom-csv2xls - Convert an Eagle design BOM file from the fullBOMmount script into
 
 =head1 SYNOPSIS
 
-    ./bom-csv2xls bom_file.csv 
+    ./bom-csv2xls bom_file.csv
     
 =head1 DESCRIPTION
 
@@ -60,7 +68,7 @@ It will list all components on the board and it will filter out:
 =back
 
 The result will be an Excel file with three output sections: the regular components, the components that do not need to be mounted, and the test points.
-The file will have the same name as the input csv file, but with xlsx as extention.
+The file will have the same name as the input csv file, but with xlsx as extension.
 
 =head1 AUTHOR
 
