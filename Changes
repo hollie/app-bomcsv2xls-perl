@@ -1,0 +1,45 @@
+==================================================
+Changes from 2015-02-23 00:00:00 +0000 to present.
+==================================================
+
+-----------------------------------------
+version 0.02 at 2016-02-23 17:11:52 +0000
+-----------------------------------------
+
+  Change: bc4304c6d6925bf558e993f45bfb7fbb779b8a16
+  Author: Lieven Hollevoet <lieven@quicksand.be>
+  Date : 2016-02-23 18:11:42 +0000
+
+    Using ';' as default separator now to be in line with the updated ULP 
+
+  Change: c9ad5676994f7b3a3b63e29510e971bc15ff44a5
+  Author: Lieven Hollevoet <lieven@quicksand.be>
+  Date : 2015-09-14 14:01:41 +0000
+
+    First functional version ready for release 
+
+  Change: 99b229ccc4cee151f56f1a41094c4389afe9c921
+  Author: Lieven Hollevoet <lieven@quicksand.be>
+  Date : 2015-09-11 16:23:32 +0000
+
+    Added gitignore 
+
+  Change: f9c1a95ddd471d09dd53b01c47e1bed7cdcf86c5
+  Author: Lieven Hollevoet <lieven@quicksand.be>
+  Date : 2015-09-11 16:20:21 +0000
+
+    Initial master import 
+
+-----------------------------------------
+version 0.01 at 2015-09-14 12:01:56 +0000
+-----------------------------------------
+
+  Change: d9abeb5df73eee16403ef29c1879019d29f12c07
+  Author: Lieven Hollevoet <lieven@quicksand.be>
+  Date : 2015-09-14 14:01:56 +0000
+
+    Build results of c9ad567 (on master) 
+
+================
+End of releases.
+================

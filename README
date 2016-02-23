@@ -1,0 +1,72 @@
+SYNOPSIS
+
+    my $object = App::BomCsv2Xls->new(inputFile => 'input.csv');
+
+DESCRIPTION
+
+    This module converts and sorts an outputfile from the fullBOMmount
+    Eagle script into a file ready for sending into production. It will
+    list all components on the board and it will filter out:
+
+    Test points (are recognized based on their name starting with PTR1B)
+
+    Components that have their value set to 'NC'
+
+    Components that have their 'OPT' attribute set to "DO_NOT_MOUNT"
+
+    The result will be an Excel file with three output sections: the
+    regular components, the components that do not need to be mounted, and
+    the test points.
+
+METHODS
+
+ new(%parameters)
+
+    This constructor returns a new App::BomCsv2Xls object. Supported
+    parameters are listed below
+
+    inputFile
+
+      The name of the input file
+
+    outputFile
+
+      The name of the output file to write to
+
+    sepChar
+
+      The separation character used in the input CSV file. Defaults to ';'.
+
+ write_xls()
+
+    Writes the Excel file
+
+ report()
+
+    Reports an array detailing the number of elements that will be mounted,
+    the number of elements that will not be mounted, and the number of test
+    points.
+
+ BUILD
+
+    Helper function to run custome code after the object has been created
+    by Moose.
+
+CONSTANTS
+
+    The following constants are used to determine what column in the index
+    contains the values that are parsed:
+
+ NAME
+
+    The name of a component.
+
+ VALUE
+
+    The component value,
+
+ OPT
+
+    Optional component attribute that contains the "DO_NOT_MOUNT" value if
+    the component should be skipped.
+
