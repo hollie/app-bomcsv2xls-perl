@@ -13,7 +13,7 @@ my $outFile = './t/stim/output.xlsx';
 # Check default functions
 can_ok ('App::BomCsv2Xls', qw(write_xls report));
 
-my $dut = App::BomCsv2Xls->new(inputFile => $inFile, outputFile => $outFile);
+my $dut = App::BomCsv2Xls->new(inputFile => $inFile, outputFile => $outFile, sepChar => ',');
 ok $dut, 'object created';
 
 my ($mount, $nomount, $testpoint) = $dut->report();
