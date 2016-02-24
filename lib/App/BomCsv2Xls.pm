@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package App::BomCsv2Xls;
-$App::BomCsv2Xls::VERSION = '0.01';
+$App::BomCsv2Xls::VERSION = '0.02';
 use Moose;
 use namespace::autoclean;
 use 5.018;
@@ -33,13 +33,19 @@ has outputFile => (
     required => 1,
 );
 
+has sepChar => (
+    is       => 'ro',
+    isa      => 'Str',
+    default  => ';',
+);
+
 # Actions that need to be run after the constructor
 sub BUILD {
     my $self = shift;
 
     # Add stuff here
 
-    my $csv = Text::CSV->new( { sep_char => ',' } );
+    my $csv = Text::CSV->new( { sep_char => $self->sepChar() } );
 
     open( my $data, '<', $self->inputFile() )
         or die "Could not open '$self->inputFile' $!\n";
@@ -74,7 +80,7 @@ sub BUILD {
             }
 
             # If the component is a test point -> move it to test points
-            if ( $fields[VALUE] =~ /^PTR1B/ ) {
+            if ( $fields[VALUE] =~ /^(PTR1B|TPB1)/ ) {
                 $db->{'data'}->{'test_points'}->{ $fields[NAME] } = \@fields;
                 next;
             }
@@ -175,7 +181,7 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
-# ABSTRACT: add description
+# ABSTRACT: Module to convert an exported Cadsoft Eagle CSV to XLS
 
 __END__
 
@@ -185,11 +191,11 @@ __END__
 
 =head1 NAME
 
-App::BomCsv2Xls - add description
+App::BomCsv2Xls - Module to convert an exported Cadsoft Eagle CSV to XLS
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -227,6 +233,10 @@ The name of the input file
 =item outputFile
 
 The name of the output file to write to
+
+=item sepChar
+
+The separation character used in the input CSV file. Defaults to ';'.
 
 =back
 

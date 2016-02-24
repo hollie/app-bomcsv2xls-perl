@@ -55,7 +55,7 @@ bom-csv2xls.pl - Converter for the output of of the Eagle full BOM mount script 
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

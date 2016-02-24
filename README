@@ -33,6 +33,10 @@ METHODS
 
       The name of the output file to write to
 
+    sepChar
+
+      The separation character used in the input CSV file. Defaults to ';'.
+
  write_xls()
 
     Writes the Excel file
